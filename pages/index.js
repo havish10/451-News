@@ -1,23 +1,42 @@
-import Link from 'next/link'
 import { parse } from 'node-html-parser'
-
-const request = require('superagent')
+import Button from '@material-ui/core/Button'
+import request from 'superagent'
+import Card from '@material-ui/core/Card'
+import CardMedia from '@material-ui/core/CardMedia'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardContent from '@material-ui/core/CardContent'
+import Grid from '@material-ui/core/Grid'
 
 export default class Index extends React.Component {
-  request = async () => {
+  static async getInitialProps() {
     const res = await request.get(
-      'https://outlineapi.com/v3/parse_article?source_url=https://www.reuters.com/article/us-usa-trump-russia/trump-russia-report-handed-in-u-s-lawmakers-seek-rapid-release-idUSKCN1R4059',
+      'https://newsapi.org/v2/top-headlines?country=us&apiKey=013e055c64384632b17a8924c642b377',
     )
-
-    console.log(res.body.data.html)
-    const root = parse(res.body.data.html)
+    return { news: res.body }
   }
 
   render() {
+    console.log(this.props.news)
     return (
       <div>
-        <button onClick={() => this.request()}>CliCK MEE!</button>
-        <p />
+        {this.props.news.articles.map(x => (
+          <Card style={{ maxWidth: 345, display: 'flex' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <CardContent>
+                <h1>{x.title}</h1>
+              </CardContent>
+              <CardMedia
+                style={{
+                  backgroundRepeat: 'no-repeat',
+                  height: '140px',
+                  width: 151,
+                }}
+                image={x.urlToImage}
+                title="Image"
+              />
+            </div>
+          </Card>
+        ))}
       </div>
     )
   }

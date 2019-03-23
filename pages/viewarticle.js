@@ -1,6 +1,4 @@
 import request from 'superagent'
-import cheerio from 'cheerio'
-import util from 'util'
 
 export default class extends React.Component {
   static async getInitialProps({ query: { url } }) {
@@ -11,7 +9,7 @@ export default class extends React.Component {
   }
 
   render() {
-    console.log(this.props.outline.data)
+    console.log(this.props.outline)
     return (
       <>
         <div style={{}}>
@@ -45,14 +43,21 @@ export default class extends React.Component {
                 }
               `}
             </style>
-
-            <p>
-              <img
-                alt=" "
-                src={`//${this.props.outline.data.domain}/favicon.ico`}
-              />
-              {this.props.outline.data.site_name}
-            </p>
+            <b>
+              <p
+                style={{
+                  fontFamily: 'Roboto',
+                  color: 'grey',
+                }}
+              >
+                <img
+                  style={{ verticalAlign: 'middle' }}
+                  alt="Logo"
+                  src={`//${this.props.outline.data.domain}/favicon.ico`}
+                />{' '}
+                {this.props.outline.data.site_name} ❯
+              </p>
+            </b>
             <h1>{this.props.outline.data.title}</h1>
             <p style={{ fontFamily: 'Roboto', textTransform: 'uppercase' }}>
               <b>
