@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@postlight/mercury-parser": "^2.0.0",
+    "cheerio": "^1.0.0-rc.2",
+    "next": "^8.0.3",
+    "node-html-parser": "^1.1.13",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "superagent": "^4.1.0",
+    "superagent-proxy": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-lemon": "^0.3.1"
+  }
+}

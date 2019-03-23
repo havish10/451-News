@@ -1,0 +1,6 @@
+{
+  "extends": "lemon",
+  "rules": {
+    "react/no-danger": "off"
+  }
+}
