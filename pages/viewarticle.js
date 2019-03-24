@@ -76,7 +76,7 @@ export default class extends React.Component {
               </h1>
               <p style={{ fontFamily: 'Roboto', textTransform: 'uppercase' }}>
                 <b style={{ float: 'left' }}>
-                  {this.props.outline.data.author}
+                  {this.props.outline.data.author}&nbsp;
                   <span style={{ color: 'grey' }}>
                     — {this.props.outline.data.date}
                   </span>

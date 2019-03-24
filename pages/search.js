@@ -8,12 +8,10 @@ import ArticleList from '../components/ArticleList'
 
 export default class Index extends React.Component {
   static async getInitialProps(props) {
-    const res = await request
-      .get(`https://newsapi.org/v2/${props.query.url}`)
-      .query({
-        apiKey: '013e055c64384632b17a8924c642b377',
-        q: props.query.q,
-      })
+    const res = await request.get(`https://newsapi.org/v2/everything`).query({
+      apiKey: '013e055c64384632b17a8924c642b377',
+      q: props.query.q,
+    })
     return { news: res.body, query: props.query }
   }
 

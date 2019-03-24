@@ -17,7 +17,6 @@ export default class extends React.Component {
       pathname: '/search',
       query: {
         q: e.target.children[0].children[0].value,
-        url: 'everything',
       },
     })
   }
