@@ -1,31 +1,36 @@
 import request from 'superagent'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Link from 'next/link'
 import Chip from '@material-ui/core/Chip'
 import Avatar from '@material-ui/core/Avatar'
 import FadeIn from 'react-fade-in'
+import Button from '@material-ui/core/Button'
+import Link from 'next/link'
+import NewsReliabilityIndicator from '../components/NewsReliabilityIndicator'
 
 export default class extends React.Component {
   static async getInitialProps({ query: { url } }) {
     const res = await request
       .get('https://outline-api.glitch.me/article')
       .query({ source_url: url })
+
     return { outline: res.body }
   }
 
   render() {
-    console.log(this.props.outline)
     return (
       <>
         <div>
+          <p>{this.props.ml}</p>
           <div
             style={{
               maxWidth: '800px',
               margin: '100px auto',
             }}
           >
+            <Link href="/">
+              <Button>Home</Button>
+            </Link>
+            <br />
+            <br />
             <Chip
               avatar={
                 <Avatar
@@ -54,9 +59,11 @@ export default class extends React.Component {
                   img {
                     max-width: 100%;
                   }
-                  a,
                   ul {
                     display: none;
+                  }
+                  a {
+                    color: black;
                   }
                   iframe {
                     width: 100%;
@@ -64,16 +71,23 @@ export default class extends React.Component {
                   }
                 `}
               </style>
-
-              <h1>{this.props.outline.data.title}</h1>
+              <h1 style={{ textAlign: 'justify' }}>
+                {this.props.outline.data.title}
+              </h1>
               <p style={{ fontFamily: 'Roboto', textTransform: 'uppercase' }}>
-                <b>
-                  {this.props.outline.data.author}{' '}
+                <b style={{ float: 'left' }}>
+                  {this.props.outline.data.author}
                   <span style={{ color: 'grey' }}>
                     — {this.props.outline.data.date}
                   </span>
                 </b>
+                <span style={{ float: 'right' }}>
+                  <NewsReliabilityIndicator
+                    html={this.props.outline.data.html}
+                  />
+                </span>
               </p>
+              <br />
               {Array.from(
                 this.props.outline.data.html.match(/(<p>(.*)<\/p>)+/g),
               ).map(x => (

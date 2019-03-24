@@ -1,12 +1,14 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import InputBase from '@material-ui/core/InputBase'
-import IconButton from '@material-ui/core/IconButton'
-import SearchIcon from '@material-ui/icons/Search'
-import Button from '@material-ui/core/Button'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
+
 import Router from 'next/router'
+import Money from '@material-ui/icons/AttachMoney'
+import Fab from '@material-ui/core/Fab'
+import Grid from '@material-ui/core/Grid'
+import Movie from '@material-ui/icons/Movie'
+import Tooltip from '@material-ui/core/Tooltip'
+import Link from 'next/link'
 
 export default class extends React.Component {
   search = e => {
@@ -15,6 +17,7 @@ export default class extends React.Component {
       pathname: '/search',
       query: {
         q: e.target.children[0].children[0].value,
+        url: 'everything',
       },
     })
   }

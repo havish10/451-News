@@ -10,6 +10,23 @@ import FadeIn from 'react-fade-in'
 
 import url from 'url'
 
+const biases = {
+  cnn: -0.5,
+  fox: 2,
+  reuters: 0,
+  bloomberg: 0,
+  'abc-news': 0,
+  time: 0,
+  'bbc-news': 0,
+  'the-washington-post': -0.5,
+  'usa-today': 0,
+  'the-wall-street-journal': 0.5,
+  'the-new-york-times': -0.5,
+  'the-huffingon-post': -1.5,
+  buzzfeed: -1.5,
+  msnbc: -1.5,
+}
+
 export default props => (
   <div style={{ margin: '100px auto', maxWidth: '800px' }}>
     <Paper>
@@ -50,10 +67,13 @@ export default props => (
                       </style>
                     </span>
                   </Link>
-                  <img
-                    src={`//${url.parse(x.url).hostname}/favicon.ico`}
-                    style={{ width: '16px', height: '16px' }}
-                  />
+                  <p>
+                    <img
+                      src={`//${url.parse(x.url).hostname}/favicon.ico`}
+                      style={{ width: '16px', height: '16px' }}
+                    />{' '}
+                    - bias={biases[x.source.id] || 'unknown'}
+                  </p>
                 </TableCell>
               </TableRow>
             ))}
