@@ -1,6 +1,9 @@
 {
   "extends": "lemon",
   "rules": {
-    "react/no-danger": "off"
+    "react/no-danger": "off",
+    "jsx-a11y/alt-text": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-wrap-multilines": "off"
   }
 }

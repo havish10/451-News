@@ -1,42 +1,56 @@
-import { parse } from 'node-html-parser'
+import React from 'react'
+import Paper from '@material-ui/core/Paper'
+import InputBase from '@material-ui/core/InputBase'
+import IconButton from '@material-ui/core/IconButton'
+import SearchIcon from '@material-ui/icons/Search'
 import Button from '@material-ui/core/Button'
-import request from 'superagent'
-import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
-import Grid from '@material-ui/core/Grid'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
+import Router from 'next/router'
 
-export default class Index extends React.Component {
-  static async getInitialProps() {
-    const res = await request.get(
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=013e055c64384632b17a8924c642b377',
-    )
-    return { news: res.body }
+export default class extends React.Component {
+  search = e => {
+    e.preventDefault()
+    Router.push({
+      pathname: '/search',
+      query: {
+        q: e.target.children[0].children[0].value,
+      },
+    })
   }
 
   render() {
-    console.log(this.props.news)
     return (
-      <div>
-        {this.props.news.articles.map(x => (
-          <Card style={{ maxWidth: 345, display: 'flex' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <CardContent>
-                <h1>{x.title}</h1>
-              </CardContent>
-              <CardMedia
-                style={{
-                  backgroundRepeat: 'no-repeat',
-                  height: '140px',
-                  width: 151,
-                }}
-                image={x.urlToImage}
-                title="Image"
-              />
-            </div>
-          </Card>
-        ))}
+      <div
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          /* bring your own prefixes */
+          transform: 'translate(-50%, -50%)',
+          width: '50%',
+        }}
+      >
+        <Paper elevation={0}>
+          <form onSubmit={e => this.search(e)}>
+            <InputBase
+              style={{
+                marginLeft: 20,
+                flex: 1,
+                margin: 'au to',
+                width: '90%',
+                height: '42px',
+                backgroundColor: '#f1f3f4',
+                borderRadius: '25px',
+                paddingLeft: '20px',
+              }}
+              innerRef={(...x) => {
+                this.input = x
+              }}
+              placeholder="Search for News"
+            />
+          </form>
+        </Paper>
       </div>
     )
   }
